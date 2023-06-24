@@ -43,20 +43,25 @@ public class UsuarioService implements ICRUDService<UsuarioRequestDTO, UsuarioRe
 
     @Override
     public UsuarioResponseDTO cadastrar(UsuarioRequestDTO dto) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'cadastrar'");
+        Usuario usuario = mapper.map(dto, Usuario.class);
+        //encriptografar senha será feito posteriormente
+        usuario = usuarioRepository.save(usuario);
+        return mapper.map(usuario, UsuarioResponseDTO.class);
     }
 
     @Override
     public UsuarioResponseDTO atualizar(Long id, UsuarioRequestDTO dto) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'atualizar'");
+        obterPorId(id); // verifica se o usuário existe, se não existir lança exceção
+        Usuario usuario = mapper.map(dto, Usuario.class);
+        usuario.setId(id); // ele ja tem o id e uso mesmo save
+        usuario = usuarioRepository.save(usuario);
+        return mapper.map(usuario, UsuarioResponseDTO.class);
     }
 
     @Override
     public void deletar(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deletar'");
+        obterPorId(id); // verifica se o usuário existe, se não existir lança exceção
+        usuarioRepository.deleteById(id);
     }
 
 
