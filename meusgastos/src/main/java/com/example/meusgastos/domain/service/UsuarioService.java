@@ -61,12 +61,13 @@ public class UsuarioService implements ICRUDService<UsuarioRequestDTO, UsuarioRe
 
     @Override
     public UsuarioResponseDTO atualizar(Long id, UsuarioRequestDTO dto) {
-        obterPorId(id); // verifica se o usuário existe, se não existir lança exceção
+        UsuarioResponseDTO usuarioBanco = obterPorId(id); // verifica se o usuário existe, se não existir lança exceção
          if(dto.getEmail() == null || dto.getSenha() == null) {
             throw new BadRequestException("Email e senha são obrigatórios!");
         }
         Usuario usuario = mapper.map(dto, Usuario.class);
         usuario.setId(id); // ele ja tem o id e uso mesmo save
+        usuario.setDataCadastro(usuarioBanco.getDataCadastro());
         usuario = usuarioRepository.save(usuario);
         return mapper.map(usuario, UsuarioResponseDTO.class);
     }
