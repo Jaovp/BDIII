@@ -19,7 +19,7 @@ public class Usuario implements UserDetails{
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column(name = "idUsuario")
-    private long id;
+    private Long id;
     private String nome;
     @Column(nullable = false, unique = true)
     private String email;
@@ -33,10 +33,10 @@ public class Usuario implements UserDetails{
     @OneToMany(mappedBy = "usuario")
     private List<Titulo> titulos;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
     public String getNome() {

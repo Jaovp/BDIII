@@ -17,7 +17,7 @@ import io.jsonwebtoken.security.Keys;
 public class JwtUtil {
     @Value("${auth.jwt.secret}")
     private String jwtsecret;
-    @Value("${auth.jwt-expiration-milliseg}")
+    @Value("${auth.jwt.expiration}")
     private Long jwtExpirationMiliseg;
 
     public String gerarToken(Authentication authentication){
